@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function getComputerChoice(){
+            const cpuChoice = Math.floor(Math.random(3) * 3);
+            let returnValue = '';
+
+            if (cpuChoice == 0) {
+                returnValue = 'rock';
+            } else if (cpuChoice == 1) {
+                returnValue = 'paper';
+            } else if(cpuChoice == 2) {
+                returnValue = 'scissors';
+            }
+
+            return returnValue;
+        }
+
+        function getHumanChoice() {
+            let value = prompt("'Rock', 'Paper', or 'Scissors'? Type:");
+            const humanValue = value.trim().toLowerCase();
+            return humanValue;
+        }
+
+
+        function playGame() {
+            
+            let humanScore = 0;
+            let cpuScore = 0;
+
+            function playRound(humanChoice, computerChoice) {
+                console.log("CPU:", computerChoice);
+                console.log("You:", humanChoice);
+
+
+                if (humanChoice == computerChoice) {
+                    return console.log("It's a Tie!" + "\n Human Score: " + humanScore + " " + "CPU Score: " + cpuScore);
+                } else if (
+                    (humanChoice === 'rock' && computerChoice === 'scissors') || 
+                    (humanChoice === 'paper' && computerChoice === 'rock') || 
+                    (humanChoice === 'scissors' && computerChoice === 'paper')) {
+
+                        console.log("You win! " + humanChoice.toUpperCase() + " beats " + computerChoice.toUpperCase() + "!");
+                        console.log("Human Score: " + humanScore);
+                        return humanScore++;
+
+                } else if (
+                    (humanChoice === 'rock' && computerChoice === 'paper') || 
+                    (humanChoice === 'paper' && computerChoice === 'scissors') || 
+                    (humanChoice === 'scissors' && computerChoice === 'rock')) {
+                
+                    console.log("CPU Wins! " + computerChoice.toUpperCase() + " beats " + humanChoice.toUpperCase() + "!" + " " + cpuScore);
+                    console.log("CPU Score: " + cpuScore);
+                    return cpuScore++;
+                } else {
+                    return console.log("Invalid Input.");
+                } 
+        }
+    
+            for (let i = 0; i < 5; i++) {
+                const humanSelection = getHumanChoice();
+                const computerSelection = getComputerChoice();
+                playRound(humanSelection,computerSelection);
+            }
+        }
+
+        playGame();
+    </script>
+</body>
+</html>
